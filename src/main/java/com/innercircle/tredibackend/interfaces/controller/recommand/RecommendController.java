@@ -2,11 +2,12 @@ package com.innercircle.tredibackend.interfaces.controller.recommand;
 
 import com.innercircle.tredibackend.domain.recommend.RecommendService;
 import com.innercircle.tredibackend.interfaces.controller.common.dto.ApiResultResponse;
-import com.innercircle.tredibackend.interfaces.controller.recommand.dto.KeywordDto;
-import com.innercircle.tredibackend.interfaces.controller.recommand.dto.KeywordsDto;
+import com.innercircle.tredibackend.interfaces.controller.recommand.dto.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -22,8 +23,8 @@ public class RecommendController {
      * @return ApiResultResponse 직접 입력 받은 검색어를 전달한다.
      */
     @PostMapping("/search")
-    public ApiResultResponse<String> sendKeyword(@RequestBody KeywordDto.Request request) {
-        return ApiResultResponse.ok(recommendService.sendKeyword(request));
+    public ApiResultResponse<TaskDto.Response> sendKeyword(@RequestBody KeywordDto.Request request) {
+        return ApiResultResponse.ok(TaskDto.Response.of(recommendService.sendKeyword(request.toCreateCommand())));
     }
 
     /**
@@ -32,8 +33,8 @@ public class RecommendController {
      * @return ApiResultResponse 정해진 키워드를 전달한다.
      */
     @PostMapping("/select")
-    public ApiResultResponse<String> sendKeywords(@RequestBody KeywordsDto.Request request) {
-        return ApiResultResponse.ok(recommendService.sendKeywords(request));
+    public ApiResultResponse<TaskDto.Response> sendKeywords(@RequestBody KeywordsDto.Request request) {
+        return ApiResultResponse.ok(TaskDto.Response.of(recommendService.sendKeywords(request.toCreateCommand())));
     }
 
     /**
@@ -42,8 +43,8 @@ public class RecommendController {
      * @return ApiResultResponse 작업에 대한 상태를 조회한다.
      */
     @GetMapping("/{taskId}")
-    public ApiResultResponse<String> getTaskStatus(@PathVariable(name = "taskId") @NotNull Long taskId) {
-        return ApiResultResponse.ok(recommendService.getTaskStatus(taskId));
+    public ApiResultResponse<TaskDto.Response> getTaskStatus(@PathVariable(name = "taskId") @NotNull Long taskId) {
+        return ApiResultResponse.ok(TaskDto.Response.of(recommendService.getTaskStatus(taskId)));
     }
 
     /**
@@ -52,11 +53,11 @@ public class RecommendController {
      * @return ApiResultResponse 키워드에 대한 결과를 받는다.
      */
     @GetMapping("/result/{taskId}")
-    public ApiResultResponse<String> getResult(@PathVariable(name = "taskId") @NotNull Long taskId) {
-        return ApiResultResponse.ok(recommendService.getResult(taskId));
+    public ApiResultResponse<List<ResultDto.Response>> getResult(@PathVariable(name = "taskId") @NotNull Long taskId) {
+        return ApiResultResponse.ok(recommendService.getResult(taskId).stream()
+                .map(ResultDto.Response::of)
+                .toList());
     }
-
-
 
     /**
      * 인기글 조회
@@ -64,8 +65,10 @@ public class RecommendController {
      * @return ApiResultResponse 키워드에 대한 결과를 받는다.
      */
     @GetMapping("/popular")
-    public ApiResultResponse<String> getPopular() {
-        return ApiResultResponse.ok(recommendService.getPopular());
+    public ApiResultResponse<List<PopularDto.Response>> getPopular() {
+        return ApiResultResponse.ok(recommendService.getPopular().favorites().stream()
+                .map(PopularDto.Response::of)
+                .toList());
     }
 
 

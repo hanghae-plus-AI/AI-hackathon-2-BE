@@ -6,5 +6,6 @@ import java.util.List;
 
 public class RecommendDto {
 
-    public record Request(@NotBlank List<String> kewords) {}
+    public record Request(@NotBlank List<String> kewords) {
+    }
 }

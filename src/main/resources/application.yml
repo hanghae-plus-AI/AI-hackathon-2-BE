@@ -4,12 +4,12 @@ spring:
   application:
     name: tredi-backend
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:53306/concert?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 1234
+    url: jdbc:mysql://localhost:3306/tredi?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
   jpa:
+    database: mysql
     hibernate:
       ddl-auto: none
     show-sql: true
@@ -34,11 +34,10 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    hikari:
-      jdbc-url: jdbc:mysql://localhost:53306/concert?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
-      driver-class-name: com.mysql.cj.jdbc.Driver
-      username: root
-      password: 1234
+    url: jdbc:mysql://localhost:3306/tredi?useUnicode=yes&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 1234
 
   jpa:
     database: mysql
