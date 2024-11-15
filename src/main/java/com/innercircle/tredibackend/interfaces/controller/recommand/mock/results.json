@@ -1,0 +1,28 @@
+{
+  "code": 200,
+  "status": "OK",
+  "message": "OK",
+  "data": [
+    {
+      "resultId": 1,
+      "url": "www.example.com",
+      "title": "JAVA 21 Good",
+      "summary": "JAVA is ~~~~~~~~~",
+      "thumbnail": "http://www.hello.com"
+    },
+    {
+      "resultId": 2,
+      "url": "www.example2.com",
+      "title": "React Good",
+      "summary": "React is ~~~~~~~~~",
+      "thumbnail": "http://www.hello.com"
+    },
+    {
+      "resultId": 3,
+      "url": "www.example3.com",
+      "title": "JAVA 21 Good",
+      "summary": "JAVA is ~~~~~~~~~",
+      "thumbnail": "http://www.hello.com"
+    }
+  ]
+}
