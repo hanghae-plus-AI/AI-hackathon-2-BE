@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS results
     task_id BIGINT,
     url       VARCHAR(255),
     title    VARCHAR(255),
-    summary    VARCHAR(255),
+    summary    LONGTEXT,
     thumbnail VARCHAR(255),
     created_at DATETIME(6),
     updated_at DATETIME(6),
